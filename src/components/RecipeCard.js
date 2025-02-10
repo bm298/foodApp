@@ -3,7 +3,6 @@ import React, { useState } from "react";
 function RecipeCards({ recipes, loading, error }) {
   const [expandedIndex, setExpandedIndex] = useState(null);
 
-  // Function to toggle details for a specific recipe
   const toggleDetails = (index) => {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
@@ -28,15 +27,15 @@ function RecipeCards({ recipes, loading, error }) {
 
                 return (
                   <div key={index} className="bg-white p-6 rounded-lg shadow-lg transition-all">
-                    {/* Recipe Title */}
+                   
                     <h3 className="text-xl font-bold mb-2 text-orange-600">{title}</h3>
 
-                    {/* Short description */}
+                  
                     <p className="text-gray-700 italic mb-4">
                       A delicious and easy-to-make meal. Click below to see the full recipe! 🍴
                     </p>
 
-                    {/* View Details Button */}
+                   
                     <button
                       className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition"
                       onClick={() => toggleDetails(index)}

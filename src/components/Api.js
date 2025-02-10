@@ -1,5 +1,5 @@
 const API_URL = "https://openrouter.ai/api/v1/chat/completions";
-const API_KEY = "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"; // ✅ REMOVE "Authorization: Bearer" from here
+const API_KEY = "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";
 
 export const fetchRecipe = async (userInput) => {
   try {
@@ -26,16 +26,16 @@ export const fetchRecipe = async (userInput) => {
       throw new Error("Invalid API response");
     }
 
-    const aiResponse = data.choices[0].message.content; // Extract AI response text
+    const aiResponse = data.choices[0].message.content;
     console.log("API Response:", aiResponse);
 
-    // **Split the response based on "---" to extract recipes**
+
     const recipes = aiResponse
       .split("---")
       .map(recipe => recipe.trim())
-      .filter(recipe => recipe.length > 0); // Remove empty items
+      .filter(recipe => recipe.length > 0);
 
-    return recipes; // Return recipes as an array
+    return recipes;
   } catch (error) {
     console.error("Error fetching recipe:", error);
     return null;

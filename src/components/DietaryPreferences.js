@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function DietaryPreferences({allergies, setAllergies,generatePrompt}) {
 
-  const [inputValue, setInputValue] = useState(''); // Input value
+  const [inputValue, setInputValue] = useState('');
 
   // Add allergy to the array when Enter is pressed
   const handleKeyDown = (e) => {
@@ -13,9 +13,9 @@ function DietaryPreferences({allergies, setAllergies,generatePrompt}) {
         inputValue.trim().charAt(0).toUpperCase() + inputValue.trim().slice(1).toLowerCase();
   
       if (!allergies.includes(formattedInput)) {
-        setAllergies([...allergies, formattedInput]); // Add if it's not a duplicate
+        setAllergies([...allergies, formattedInput]);
       }
-      setInputValue(''); // Clear input
+      setInputValue(''); 
     }
   };
   
