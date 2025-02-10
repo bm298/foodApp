@@ -1,5 +1,5 @@
 const API_URL = "https://openrouter.ai/api/v1/chat/completions";
-const API_KEY = "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";
+const API_KEY = "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";
 
 export const fetchRecipe = async (userInput) => {
   try {
