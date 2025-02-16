@@ -1,5 +1,5 @@
 const API_URL = "https://openrouter.ai/api/v1/chat/completions";
-const API_KEY = "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";
+const API_KEY = "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";
 
 export const fetchRecipe = async (userInput) => {
   try {
@@ -21,21 +21,30 @@ export const fetchRecipe = async (userInput) => {
     });
 
     const data = await response.json();
+    console.log("Full API Response:", data);
 
-    if (!data || !data.choices || data.choices.length === 0) {
-      throw new Error("Invalid API response");
+    if (!data.choices || !data.choices[0]?.message?.content) {
+      console.error("Invalid API response format.");
+      return null;
     }
 
-    const aiResponse = data.choices[0].message.content;
-    console.log("API Response:", aiResponse);
+    let aiResponse = data.choices[0].message.content.trim();
 
+    // Try fixing common JSON issues before parsing
+    aiResponse = aiResponse.replace(/,\s*]/g, "]"); // Fix trailing commas in arrays
+    aiResponse = aiResponse.replace(/,\s*}/g, "}"); // Fix trailing commas in objects
 
-    const recipes = aiResponse
-      .split("---")
-      .map(recipe => recipe.trim())
-      .filter(recipe => recipe.length > 0);
-
-    return recipes;
+    try {
+      const parsedData = JSON.parse(aiResponse);
+      if (!parsedData.recipes || !Array.isArray(parsedData.recipes)) {
+        console.error("Invalid API response structure.");
+        return null;
+      }
+      return parsedData.recipes;
+    } catch (jsonError) {
+      console.error("Failed to parse AI response as JSON:", jsonError);
+      return null;
+    }
   } catch (error) {
     console.error("Error fetching recipe:", error);
     return null;

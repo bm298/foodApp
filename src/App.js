@@ -4,22 +4,26 @@ import Hero from './components/Hero';
 import Filters from './components/Filters';
 import DietaryPreferences from './components/DietaryPreferences';
 import RecipeCards from './components/RecipeCard';
+import MealSelector from './components/MealSelector';
+import HomeIngredients from './components/HomeIngredients';
 import { fetchRecipe } from "./components/Api";
-import { generateRecipePrompt } from "./components/Prompt";
+import { generateRecipePromptMakeOwnMeal } from "./components/GenerateRecipePromptMakeOwnMeal";
+import { generateRecipePromptByIngredients } from './components/GenerateRecipePromptByIngredients';
 
 
 
 function App() {
-
-  const [preferences, setPreferences] = useState({
-    mood: '',
-    cuisine: '',
-    time: '',
-    skillLevel: '',
-    diet: '',
-  });
-
+const initialPreferences = {
+  mood: '',
+  cuisine: '',
+  time: '',
+  skillLevel: '',
+  diet: '',
+};
+  const [activeTab, setActiveTab] = useState("meal");
+  const [preferences, setPreferences] = useState(initialPreferences);
   const [allergies, setAllergies] = useState([]); 
+  const [ingredients, setIngredients] = useState([]); 
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -31,12 +35,18 @@ function App() {
     const { mood, cuisine, time, skillLevel, diet } = preferences;
     const excludedIngredients = allergies.join(", ");
 
-    const prompt = generateRecipePrompt(preferences, allergies);
+    let prompt = "";
 
-    
-    console.log("Generated Prompt:", prompt);
 
     try {
+      if (activeTab == "meal"){
+        prompt=generateRecipePromptMakeOwnMeal(preferences, allergies);
+        console.log("Generated Prompt own meal:", prompt);
+      }
+      if (activeTab == "ingredients"){
+        prompt=generateRecipePromptByIngredients(preferences, ingredients);
+        console.log("Generated Prompt by ingredients:", prompt);
+      }
       const response = await fetchRecipe(prompt);
       console.log("Full Response app:", response);
     
@@ -55,18 +65,31 @@ function App() {
 
   return (
     <div className="font-sans">
-      <Navbars />
+    <Navbars />
       <Hero />
-      <Filters preferences={preferences} setPreferences={setPreferences} />
+      <MealSelector activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Filters preferences={preferences} setPreferences={setPreferences} /> 
+
+    {activeTab==="meal" ? (
+      <>
       <DietaryPreferences 
         preferences={preferences} 
         setPreferences={setPreferences} 
         allergies={allergies} 
         setAllergies={setAllergies}
         generatePrompt={generatePrompt}
-      />
-      {/* if */}
-      <RecipeCards 
+      />   
+      </>
+    ) : (
+
+    <HomeIngredients 
+      ingredients={ingredients}
+      setIngredients={setIngredients}
+      generatePrompt={generatePrompt}
+    />
+    )}
+
+    <RecipeCards 
         recipes={recipes}
         loading={loading} 
         error={error}  
