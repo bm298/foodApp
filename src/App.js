@@ -68,7 +68,7 @@ const initialPreferences = {
     <Navbars />
       <Hero />
       <MealSelector activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Filters preferences={preferences} setPreferences={setPreferences} /> 
+      <Filters preferences={preferences} setPreferences={setPreferences} activeTab={activeTab} /> 
 
     {activeTab==="meal" ? (
       <>

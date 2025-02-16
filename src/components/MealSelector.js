@@ -16,7 +16,7 @@ function MealSelector({ preferences, setPreferences, ingredients, setIngredients
 
         <button
           className={`px-4 py-2 font-semibold rounded-lg transition ${
-            activeTab === "ingredients" ? "bg-orange-600 text-white" : "bg-gray-200"
+            activeTab === "ingredients" ? "bg-green-600 text-white" : "bg-gray-200"
           }`}
           onClick={() => setActiveTab("ingredients")}
         >

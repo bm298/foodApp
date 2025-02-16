@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Filters({ preferences, setPreferences }) {  
+function Filters({ preferences, setPreferences,activeTab }) {  
 
   // const [activeTab, setActiveTab] = useState("meal");
 
@@ -8,8 +8,14 @@ function Filters({ preferences, setPreferences }) {
     setPreferences({ ...preferences, [e.target.name]: e.target.value });
   };
 
+  function getBackgroundColor(activeTab) {
+    if (activeTab === "meal") return "bg-orange-100";
+    if (activeTab === "ingredients") return "bg-green-100";
+    return "bg-gray-50";
+  }
+
   return (
-    <section id="filters" className="py-16 bg-gray-50">
+    <section id="filters" className={`py-16 ${getBackgroundColor(activeTab)}`}> 
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Filters</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
