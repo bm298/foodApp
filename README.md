@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Recipe Generator App is a web application that helps users find recipes based on their preferences and available ingredients. Whether you're feeling a specific mood, craving a particular cuisine, or simply need to make use of ingredients you have at home, this app provides personalized recipe suggestions to suit your needs. 
+My Recipe Generator App named ChefAI is a web application that helps users find recipes based on their preferences and available ingredients. Whether you're feeling a specific mood, craving a particular cuisine, or simply need to make use of ingredients you have at home, this app provides personalized recipe suggestions to suit your needs. 
 
 The app allows users to:
 - **Generate recipes** based on mood, cuisine, cooking time, skill level, and dietary preferences.

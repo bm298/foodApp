@@ -51,7 +51,7 @@ const initialPreferences = {
       console.log("Full Response app:", response);
     
       if (Array.isArray(response) && response.length > 0) {
-        setRecipes(response); // Store the array directly
+        setRecipes(response);
       } else {
         setError("Failed to fetch recipes. Try again.");
       }

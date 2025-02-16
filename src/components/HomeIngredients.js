@@ -5,7 +5,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 function HomeIngredients({ ingredients, setIngredients, generatePrompt }) {
   const [inputValue, setInputValue] = useState('');
 
-  // Add ingredient to the list
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && inputValue.trim()) {
       const formattedInput =
@@ -18,7 +17,6 @@ function HomeIngredients({ ingredients, setIngredients, generatePrompt }) {
     }
   };
 
-  // Remove ingredient
   const removeIngredient = (ingredientToRemove) => {
     setIngredients(ingredients.filter((ingredient) => ingredient !== ingredientToRemove));
   };
@@ -39,7 +37,6 @@ function HomeIngredients({ ingredients, setIngredients, generatePrompt }) {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Ingredients I Have</h2>
         <div className="max-w-2xl mx-auto">
-          {/* Ingredient Input */}
           <label className="block mb-4">
             <span className="text-gray-700">Enter ingredients you have</span>
             <input

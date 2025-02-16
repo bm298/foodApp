@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function Filters({ preferences, setPreferences }) {  
 
-  const [activeTab, setActiveTab] = useState("meal");
+  // const [activeTab, setActiveTab] = useState("meal");
 
   const handleChange = (e) => {
     setPreferences({ ...preferences, [e.target.name]: e.target.value });

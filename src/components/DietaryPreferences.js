@@ -5,12 +5,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 function DietaryPreferences({allergies, setAllergies,generatePrompt}) {
 
   const [inputValue, setInputValue] = useState('');
-
-  // Add allergy to the array when Enter is pressed
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && inputValue.trim()) {
-      const formattedInput =
-        inputValue.trim().charAt(0).toUpperCase() + inputValue.trim().slice(1).toLowerCase();
+      const formattedInput = inputValue.trim().charAt(0).toUpperCase() + inputValue.trim().slice(1).toLowerCase();
   
       if (!allergies.includes(formattedInput)) {
         setAllergies([...allergies, formattedInput]);
@@ -19,19 +16,16 @@ function DietaryPreferences({allergies, setAllergies,generatePrompt}) {
     }
   };
   
-  // Function to remove allergy from the list
   const removeAllergy = (allergyToRemove) => {
     setAllergies(allergies.filter((allergy) => allergy !== allergyToRemove));
   };
 
-  // Handle drag end to rearrange or delete items
   const handleDragEnd = (result) => {
     const { destination, draggableId } = result;
 
     if (!destination) return;
 
     if (destination.droppableId === 'bin') {
-      // Remove the item from the list
       removeAllergy(draggableId);
     }
   };
@@ -41,7 +35,6 @@ function DietaryPreferences({allergies, setAllergies,generatePrompt}) {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Dietary Preferences</h2>
         <div className="max-w-2xl mx-auto">
-          {/* Allergy Input */}
           <label className="block mb-4">
             <span className="text-gray-700">Ingredients Not to Include</span>
             <input
